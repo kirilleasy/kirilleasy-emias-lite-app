@@ -1,0 +1,26 @@
+{
+  "name": "emias-lite-app",
+  "version": "0.2.0",
+  "description": "EMIAS-like lite desktop app (patients, visits, Excel sync, roles).",
+  "author": "You",
+  "license": "MIT",
+  "main": "src/main/main.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder -w nsis portable",
+    "postinstall": "electron-builder install-app-deps"
+  },
+  "engines": {
+    "node": ">=20 <23"
+  },
+  "dependencies": {
+    "better-sqlite3": "^9.4.0",
+    "uuid": "^9.0.1",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "electron": "^30.0.0",
+    "electron-builder": "^24.6.0"
+  }
+}

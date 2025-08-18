@@ -1,0 +1,20 @@
+appId: com.example.emiaslite
+productName: EMIAS Lite
+directories:
+  output: dist
+  buildResources: build
+files:
+  - "!dist/**"
+  - "src/**"
+  - "node_modules/**"
+  - "package.json"
+extraResources:
+  - from: data
+    to: data
+win:
+  target: [nsis, portable]
+nsis:
+  oneClick: true
+  perMachine: false
+  allowToChangeInstallationDirectory: false
+  deleteAppDataOnUninstall: false

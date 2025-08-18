@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; script-src 'self' 'unsafe-inline'">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>EMIAS Lite</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div id="authOverlay" class="auth-overlay">
+    <div class="auth-card">
+      <h2>Вход</h2>
+      <label>Пользователь
+        <select id="loginSelect"></select>
+      </label>
+      <label>Логин (если список пуст)
+        <input id="loginInput" placeholder="nms / nmp / priyomka / admin" />
+      </label>
+      <label>PIN
+        <input id="pinInput" type="password" placeholder="****" />
+      </label>
+      <div class="right">
+        <button id="authEnter">Войти</button>
+      </div>
+      <div id="authError" class="auth-error"></div>
+    </div>
+  </div>
+
+  <header>
+    <h1>EMIAS Lite</h1>
+    <nav>
+      <button class="tab-btn" data-tab="dashboard">Дашборд</button>
+      <button class="tab-btn" data-tab="nms">НМС</button>
+      <button class="tab-btn" data-tab="nmp">НМП</button>
+      <button class="tab-btn" data-tab="priyomka">Приёмка</button>
+      <button class="tab-btn" data-tab="patients">Пациенты</button>
+      <button class="tab-btn" data-tab="workbook">Excel</button>
+    </nav>
+    <div id="userBadge" class="user-badge"></div>
+  </header>
+
+  <main>
+    <section id="dashboard" class="tab active">
+      <h2>Сегодня</h2>
+      <div class="cards" id="cards"></div>
+    </section>
+
+    <section id="nms" class="tab">
+      <h2>НМС (Приём начальника мед. службы)</h2>
+      <div class="unit-panel" data-unit="NMS"></div>
+    </section>
+
+    <section id="nmp" class="tab">
+      <h2>НМП (Приём начальника мед. пункта)</h2>
+      <div class="unit-panel" data-unit="NMP"></div>
+    </section>
+
+    <section id="priyomka" class="tab">
+      <h2>Приёмка (вновь поступившие)</h2>
+      <div class="unit-panel" data-unit="PRIYOMKA"></div>
+    </section>
+
+    <section id="patients" class="tab">
+      <h2>Пациенты</h2>
+      <div class="toolbar">
+        <input id="search" placeholder="Поиск..." />
+        <button id="addPatient">Добавить пациента</button>
+      </div>
+      <table id="patientsTable">
+        <thead>
+          <tr>
+            <th>Фамилия</th><th>Имя</th><th>Отчество</th><th>ДР</th><th>Телефон</th><th></th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <section id="workbook" class="tab">
+      <h2>Режим Excel</h2>
+      <p>Подключите Excel-файл для двусторонней синхронизации списка пациентов.</p>
+      <div id="excelConfig"></div>
+      <div class="toolbar">
+        <button id="pickExcel">Выбрать файл</button>
+        <button id="importExcel">Импорт из Excel → БД</button>
+        <button id="exportExcel">Экспорт из БД → Excel</button>
+        <button id="syncBoth">Синхронизировать в обе стороны</button>
+      </div>
+      <pre id="excelLog"></pre>
+    </section>
+  </main>
+
+  <div id="modal" class="modal hidden">
+    <div class="modal-content">
+      <h3 id="modalTitle">Пациент</h3>
+      <form id="patientForm">
+        <input type="hidden" id="p_id">
+        <div class="grid">
+          <label>Фамилия<input id="p_lastName" required></label>
+          <label>Имя<input id="p_firstName" required></label>
+          <label>Отчество<input id="p_middleName"></label>
+          <label>Дата рождения<input id="p_birthDate" type="date"></label>
+          <label>Пол<select id="p_sex"><option value=""></option><option>М</option><option>Ж</option></select></label>
+          <label>Телефон<input id="p_phone"></label>
+          <label>Полис/страховка<input id="p_insurance"></label>
+        </div>
+        <div class="right">
+          <button type="submit">Сохранить</button>
+          <button type="button" id="closeModal">Отмена</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="./index.js"></script>
+</body>
+</html>
